@@ -67,6 +67,8 @@ class TestSegment:
     # Инициализация (выполняется для каждого из тестов класса)
     def setup_method(self):
         self.f = Segment(R2Point(0.0, 0.0), R2Point(1.0, 0.0))
+        R2Point.fp1 = R2Point(0.0, 0.0)
+        R2Point.fp2 = R2Point(3.0, 3.0)
 
     # Двуугольник является фигурой
     def test_figure(self):
@@ -162,3 +164,48 @@ class TestPolygon:
 
     def test_area2(self):
         assert self.f.add(R2Point(1.0, 1.0)).area() == approx(1.0)
+
+    def test_count0(self):
+        assert self.f.count_vertex() == 0
+
+    def test_count1(self):
+        assert self.f.add(R2Point(3.0, 3.0)).count_vertex() == 0
+
+    def test_count2(self):
+        assert self.f.add(
+            R2Point(
+                10.0,
+                6.0)).add(
+                    R2Point(
+                        5.0,
+                        5.0)).count_vertex() == 1
+
+    def test_count3(self):
+        assert self.f.add(R2Point(500.0, 1.0)).count_vertex() == 1
+
+    def test_count4(self):
+        assert self.f.add(
+            R2Point(
+                5.0,
+                5.0)).add(
+                    R2Point(
+                        500.0,
+                        1.0)).add(
+                            R2Point(
+                                500.0,
+                                -1.0)).count_vertex() == 2
+
+    def test_count5(self):
+        assert self.f.add(
+            R2Point(
+                5.0,
+                5.0)).add(
+                    R2Point(
+                        9.0,
+                        1.0)).add(
+                            R2Point(
+                                9.0,
+                                -1.0)).add(
+                                    R2Point(0.0,
+                                            50.0)
+                                            ).count_vertex() == 3
