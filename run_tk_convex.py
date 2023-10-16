@@ -49,8 +49,10 @@ except(ZeroDivisionError):
     x4 = R2Point.fp2.x
     y3 = R2Point.fp1.y + 10
     y4 = R2Point.fp2.y - 10
-
-c = sqrt((y3 - y4)**2 + (x3 - x4)**2)/(y4-y3)
+try:
+    c = sqrt((y3 - y4)**2 + (x3 - x4)**2)/(y4-y3)
+except(ZeroDivisionError):
+    c = 1
 tk.draw_rline(R2Point(x3, y3 + c), R2Point(x4, y4 + c))
 tk.draw_rline(R2Point(x3, y3 - c), R2Point(x4, y4 - c))
 
