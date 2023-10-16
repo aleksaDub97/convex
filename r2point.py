@@ -44,6 +44,16 @@ class R2Point:
             return self.x == other.x and self.y == other.y
         return False
 
+    def out_line(self): # проверяет, лежит ли точка вне полосы
+        if abs(2*R2Point.area(
+            self.fp1,
+            self.fp2, self)/R2Point.dist(
+                self.fp1,
+                self.fp2)) > 1:
+            return 1
+        else:
+            return 0
+
 
 if __name__ == "__main__":
     x = R2Point(1.0, 1.0)

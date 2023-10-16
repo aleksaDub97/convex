@@ -11,12 +11,18 @@ class Figure:
     def area(self):
         return 0.0
 
+    def count_vertex(self):
+        return 0
+
 
 class Void(Figure):
     """ "Hульугольник" """
 
     def add(self, p):
         return Point(p)
+
+    def count_vertex(self):
+        return None
 
 
 class Point(Figure):
@@ -27,6 +33,9 @@ class Point(Figure):
 
     def add(self, q):
         return self if self.p == q else Segment(self.p, q)
+
+    def count_vertex(self):
+        return self.p.out_line()
 
 
 class Segment(Figure):
@@ -48,6 +57,9 @@ class Segment(Figure):
         else:
             return self
 
+    def count_vertex(self):
+        return self.p.out_line() + self.q.out_line()
+
 
 class Polygon(Figure):
     """ Многоугольник """
@@ -63,6 +75,8 @@ class Polygon(Figure):
             self.points.push_first(c)
         self._perimeter = a.dist(b) + b.dist(c) + c.dist(a)
         self._area = abs(R2Point.area(a, b, c))
+        self._count_vertex = a.out_line() + \
+            b.out_line() + c.out_line()
 
     def perimeter(self):
         return self._perimeter
@@ -90,26 +104,35 @@ class Polygon(Figure):
 
             # удаление освещённых рёбер из начала дека
             p = self.points.pop_first()
+            self._count_vertex -= p.out_line()
             while t.is_light(p, self.points.first()):
                 self._perimeter -= p.dist(self.points.first())
                 self._area += abs(R2Point.area(t, p, self.points.first()))
                 p = self.points.pop_first()
+                self._count_vertex -= p.out_line()
             self.points.push_first(p)
+            self._count_vertex += p.out_line()
 
             # удаление освещённых рёбер из конца дека
             p = self.points.pop_last()
+            self._count_vertex -= p.out_line()
             while t.is_light(self.points.last(), p):
                 self._perimeter -= p.dist(self.points.last())
                 self._area += abs(R2Point.area(t, p, self.points.last()))
                 p = self.points.pop_last()
+                self._count_vertex -= p.out_line()
             self.points.push_last(p)
+            self._count_vertex += p.out_line()
 
             # добавление двух новых рёбер
             self._perimeter += t.dist(self.points.first()) + \
                 t.dist(self.points.last())
             self.points.push_first(t)
-
+            self._count_vertex += t.out_line()
         return self
+
+    def count_vertex(self):
+        return self._count_vertex
 
 
 if __name__ == "__main__":

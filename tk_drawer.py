@@ -1,4 +1,5 @@
 from tkinter import *
+from math import sqrt
 
 # Размер окна
 SIZE = 600
@@ -49,6 +50,11 @@ class TkDrawer:
     # Рисование линии
     def draw_line(self, p, q):
         self.canvas.create_line(x(p), y(p), x(q), y(q), fill="black", width=2)
+        self.root.update()
+
+    # Рисование области
+    def draw_rline(self, p, q):
+        self.canvas.create_line(x(p), y(p), x(q), y(q), fill="red", width=2)
         self.root.update()
 
 
