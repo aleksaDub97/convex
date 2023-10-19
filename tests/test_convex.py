@@ -26,6 +26,10 @@ class TestVoid:
     def test_аrea(self):
         assert self.f.area() == 0.0
 
+    # Count нульугольника имеет тип None
+    def test_count(self):
+        assert self.f.count_vertex() == None
+
     # При добавлении точки нульугольник превращается в одноугольник
     def test_add(self):
         assert isinstance(self.f.add(R2Point(0.0, 0.0)), Point)
@@ -36,6 +40,8 @@ class TestPoint:
     # Инициализация (выполняется для каждого из тестов класса)
     def setup_method(self):
         self.f = Point(R2Point(0.0, 0.0))
+        R2Point.fp1 = R2Point(0.0, 0.0)
+        R2Point.fp2 = R2Point(3.0, 3.0)
 
     # Одноугольник является фигурой
     def test_figure(self):
@@ -52,6 +58,10 @@ class TestPoint:
     # Площадь одноугольника нулевая
     def test_аrea(self):
         assert self.f.area() == 0.0
+
+    # Площадь нульугольника нулевая
+    def test_count(self):
+        assert self.f.count_vertex() == 0
 
     # При добавлении точки одноугольник может не измениться
     def test_add1(self):
@@ -85,6 +95,9 @@ class TestSegment:
     # Площадь двуугольника нулевая
     def test_аrea(self):
         assert self.f.area() == 0.0
+
+    def test_count(self):
+        assert self.f.count_vertex() == 0.0        
 
     # При добавлении точки двуугольник может не измениться
     def test_add1(self):
@@ -165,7 +178,7 @@ class TestPolygon:
     def test_area2(self):
         assert self.f.add(R2Point(1.0, 1.0)).area() == approx(1.0)
 
-    def test_count0(self):
+    def test_count0(self): # 15 строка convex.py
         assert self.f.count_vertex() == 0
 
     def test_count1(self):
