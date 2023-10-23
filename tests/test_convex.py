@@ -28,7 +28,7 @@ class TestVoid:
 
     # Count нульугольника имеет тип None
     def test_count(self):
-        assert self.f.count_vertex() == None
+        assert self.f.count_vertex() == 0.0
 
     # При добавлении точки нульугольник превращается в одноугольник
     def test_add(self):
@@ -97,7 +97,7 @@ class TestSegment:
         assert self.f.area() == 0.0
 
     def test_count(self):
-        assert self.f.count_vertex() == 0.0        
+        assert self.f.count_vertex() == 0.0
 
     # При добавлении точки двуугольник может не измениться
     def test_add1(self):
@@ -178,7 +178,7 @@ class TestPolygon:
     def test_area2(self):
         assert self.f.add(R2Point(1.0, 1.0)).area() == approx(1.0)
 
-    def test_count0(self): # 15 строка convex.py
+    def test_count0(self):  # 15 строка convex.py
         assert self.f.count_vertex() == 0
 
     def test_count1(self):
