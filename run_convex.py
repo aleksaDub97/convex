@@ -11,7 +11,8 @@ f = Void()
 try:
     while True:
         f = f.add(R2Point())
-        print(f"S = {f.area()}, P = {f.perimeter()}, count = {f.count_vertex()}")
+        print(f"S = {f.area()}, P = {f.perimeter()}, count = "
+              "{f.count_vertex()}")
         print()
 except(EOFError, KeyboardInterrupt):
     print("\nStop")

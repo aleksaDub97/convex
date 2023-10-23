@@ -64,7 +64,8 @@ try:
         f.draw(tk)
         tk.draw_rline(R2Point(x3, y3 + c), R2Point(x4, y4 + c))
         tk.draw_rline(R2Point(x3, y3 - c), R2Point(x4, y4 - c))
-        print(f"S = {f.area()}, P = {f.perimeter()}, count = {f.count_vertex()}")
+        print(f"S = {f.area()}, P = {f.perimeter()}, count = "
+              "{f.count_vertex()}")
 except(EOFError, KeyboardInterrupt):
     print("\nStop")
     tk.close()

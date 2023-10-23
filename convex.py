@@ -21,9 +21,6 @@ class Void(Figure):
     def add(self, p):
         return Point(p)
 
-    def count_vertex(self):
-        return None
-
 
 class Point(Figure):
     """ "Одноугольник" """
